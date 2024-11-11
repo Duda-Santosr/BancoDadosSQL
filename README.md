@@ -27,3 +27,24 @@ CREATE TABLE editora (
     pais VARCHAR(50)
 );
 ```
+
+### 1.3 Criando a tabela 'autor'
+```
+CREATE TABLE autor(
+    id_autor INT PRIMARY KEY AUTO_INCREMENT,
+    nome_autor VARCHAR(200),
+    data_nascimento DATE 
+);
+```
+
+### 1.4 Criando a tabela 'assunto'
+```
+CREATE TABLE assunto(
+    id_assunto INT PRIMARY KEY AUTO_INCREMENT,
+    descricao_assunto VARCHAR(500) NOT NULL
+);
+```
+
+### 1.5 Criando a tabela 'livro'
+```
+CREATE
