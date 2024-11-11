@@ -10,3 +10,12 @@ Este guia será dividido em etapas para demonstrar desde a criação de tabelas,
 * __UPDATE__ para atualizar os registros
 * __DELETE__ para remover os registros
 * __SELECT__ para consultar e visualizar dados
+
+## Passo 1: criação de Banco de Dados e das Tabelas
+### 1.1 Criando o DB
+
+```
+CREATE DATABASE biblioteca;
+USE biblioteca;
+
+```
