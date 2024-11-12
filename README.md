@@ -50,10 +50,13 @@ CREATE TABLE assunto(
 CREATE TABLE livro(
     id_livro INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(150) NOT NULL,
-    ano_publicacao YEAR,
-    FOREIGN KEY(id_editora) REFERENCES editora (id_editora),
-    FOREIGN KEY (id_autor) REFERENCES autor(id_autor),
-    FOREIGN KEY (id_assunto) REFERENCES assunto (id_assunto)
+    ano_publicacao INT,
+    editora INT,
+    autor INT,
+    assunto INT,
+    FOREIGN KEY(editora) REFERENCES editora (id_editora),
+    FOREIGN KEY (autor) REFERENCES autor(id_autor),
+    FOREIGN KEY (assunto) REFERENCES assunto (id_assunto)
 );
 ```
 
@@ -75,3 +78,80 @@ Após a criação da tabela, podemos adicionar novos campos. Vamos adicionar uma
 ALTER TABLE autor
 ADD COLUMN  email VARCHAR(100);
 ```
+## Passo 3: Remover tabela usando 'DROP'
+Se precisar remover uma tabela usamos o comando 'DROP'.
+Neste exemplo vamos remover a tabela 'extra'
+
+```SQL
+DROP TABLE extra;
+```
+## Passo 4: Inserindo dados usando 'INSERT'
+Agora que as tabelas já estão prontas, vamos inserir dados nelas.
+
+#### 4.1 Inserindo dados na tabela 'editora'
+```SQL
+INSERT INTO editora (nome_editora, pais)
+VALUES
+('Editora Alfa', 'Brasil'),
+('Editora Beta', 'Portugal'),
+('Editora Bertrand Brasil', 'Brasil');
+```
+
+#### 4.2 Inserindo dados na tabela 'autor'
+```SQL
+INSERT INTO autor (nome_autor, data_nascimento, email)
+VALUES 
+('Jorge Amado', '1912-08-10', 'jorginho@email.com'),
+('Machado de Assis', '1839-06-21', 'machadinho@email.com'),
+('Matt Haig', '1985-06-03', 'matt@email.com');
+```
+
+#### 4.3 Inserindo dados na tabela 'assunto'
+```SQL
+INSERT INTO assunto (descricao_assunto)
+VALUES 
+('Ficção'),
+('Mistério'),
+('Terror'),
+('Romance');
+```
+
+## Passo 5:atualizando os dados 'UPDATE'
+POdemos atualizar os dados com o comando UPDATE.
+Vamos corrigir a data de publicação do livro 'Capitães da Areia'
+
+```SQL
+UPDATE livro
+SET ano_publicação = 1938
+WHERE titulo = 'Capitães da Areia';
+```
+
+## Passo 6: Excluindo os dados usando 'DELETE'
+Para remover os registros de uma tabela usamos o comando 'DELETE'.
+Vamos excluir o livro 'Memórias Póstumas de Brás Cubas'.
+
+```SQL
+DELETE FROM livro
+WHERE id_livro = 4;
+```
+
+## Passo 7: Consultando os dados usando 'SELECT'
+É possível selecionar os dados para visualizar da forma como quiser.
+Para isso usamos o comando 'SELECT'
+
+#### Passo 7.1: Selecionar todos os livros com suas editoras e autores
+Vamos usar dados das tabelas 'livros', 'editora', 'autor' e 'assunto' usando o comando 'JOIN'
+
+```SQL
+SELECT livro.titulo AS nome,
+    editora.nome_editora AS editora,
+    autor.nome_autor AS autor,
+    assunto.descricao_assunto AS tema,
+    livro.ano_publicacao AS ano_publicacao
+FROM livro
+JOIN editora ON livro.id_editora = editora.id_editora
+JOIN autor ON livro.id_autor = autor.id_autor
+JOIN assunto ON livro.id_assunto = assunto.id_assunto;
+```
+
+#### 7.2: Exibir apenas os livros com o mesmo tema
